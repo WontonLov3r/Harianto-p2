@@ -44,8 +44,7 @@ function swapPhoto() {
 var mCurrentIndex = 0;
 
 // XMLHttpRequest variable
-var mRequest = new XMLHttpRequest();
-
+let mRequest = new XMLHttpRequest();
 // Array holding GalleryImage objects (see below).
 var mImages = [];
 
@@ -69,7 +68,7 @@ function makeGalleryImageOnloadCallback(galleryImage) {
 $(document).ready( function() {
 	
 	// This initially hides the photos' metadata information
-	$('.details').eq(0).hide();
+	//$('.details').eq(0).hide();
 	
 });
 
@@ -86,4 +85,18 @@ function GalleryImage() {
 	let date =""
 	let img =""
 	//4. either a String (src URL) or an an HTMLImageObject (bitmap of the photo. https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement)
+}
+
+//Get the information from the JSON file, create a variable containing the response text and parse it
+function fetchJSON() {
+	mRequest.onreadystatechange = function () {
+		if (mRequest.readyState == 4 && mRequest.status == 200) {
+			let mJson = JSON.parse(mRequest.responseText);
+		}
+		else {
+			console.log("We connected to the server, but it returned an error")
+		}
+	}
+	mRequest.open("GET", mURL, true)
+	mRequest.send()
 }
