@@ -33,20 +33,35 @@ function animate() {
 /************* DO NOT TOUCH CODE ABOVE THIS LINE ***************/
 
 function swapPhoto() {
+	
+		if (mCurrentIndex >= mImages.length) {
+			let mCurrentIndex = 0;
+		} else {
+			let mCurrentIndex = mImages[-1];
+		  }
+	
 	//Add code here to access the #slideShow element.
 	//Access the img element and replace its source
 	//with a new image from your images array which is loaded 
 	//from the JSON string
 	document.getElementById("photo").src = mImages[mCurrentIndex]
 	console.log('swap photo');
-	let description = document.getElementsByClassName("description") 
-	let location = document.getElementsByClassName("location")
-	let date = document.getElementsByClassName("date")
+	let description = document.getElementsByClassName("description")[0]
+	let location = document.getElementsByClassName("location")[0]
+	let date = document.getElementsByClassName("date")[0]
 	description = "description: " + mImages[mCurrentIndex].description
 	location = "location: " + mImages[mCurrentIndex].location
 	date = "date: " + mImages[mCurrentIndex].date
+	let mLastFrameTime = 0;
+	mCurrentIndex += 1
 }
 
+
+function iterateJSON(){
+	for(let x = 0; x < mJson.length; x++){
+		mImages[x] = new GalleryImage
+	}
+}
 // Counter for the mImages array
 var mCurrentIndex = 0;
 
@@ -85,12 +100,12 @@ window.addEventListener('load', function() {
 
 }, false);
 
-function GalleryImage() {
+function GalleryImage(location, description, date, img) {
 	//implement me as an object to hold the following data about an image:
-	let location = ""
-	let description =""
-	let date =""
-	let img =""
+	//let location = ""
+	//let description =""
+	//let date =""
+	//let img =""
 	//4. either a String (src URL) or an an HTMLImageObject (bitmap of the photo. https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement)
 }
 
