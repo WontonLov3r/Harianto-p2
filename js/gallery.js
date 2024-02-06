@@ -37,31 +37,27 @@ function swapPhoto() {
 		if (mCurrentIndex >= mImages.length) {
 			let mCurrentIndex = 0;
 		} else {
-			let mCurrentIndex = mImages[-1];
+			let mCurrentIndex = mImages.length -1;
 		  }
 	
 	//Add code here to access the #slideShow element.
 	//Access the img element and replace its source
 	//with a new image from your images array which is loaded 
 	//from the JSON string
-	document.getElementById("photo").src = mImages[mCurrentIndex]
+	document.getElementById("photo").src = mImages[mCurrentIndex].img
 	console.log('swap photo');
 	let description = document.getElementsByClassName("description")[0]
 	let location = document.getElementsByClassName("location")[0]
 	let date = document.getElementsByClassName("date")[0]
-	description = "description: " + mImages[mCurrentIndex].description
-	location = "location: " + mImages[mCurrentIndex].location
-	date = "date: " + mImages[mCurrentIndex].date
+	description.innerHTML = "description: " + mImages[mCurrentIndex].description
+	location.innerHTML = "location: " + mImages[mCurrentIndex].location
+	date.innerHTML = "date: " + mImages[mCurrentIndex].date
 	let mLastFrameTime = 0;
 	mCurrentIndex += 1
 }
 
 
-function iterateJSON(){
-	for(let x = 0; x < mJson.length; x++){
-		mImages[x] = new GalleryImage
-	}
-}
+
 // Counter for the mImages array
 var mCurrentIndex = 0;
 
@@ -75,7 +71,7 @@ var mJson;
 
 // URL for the JSON to load by default
 // Some options for you are: images.json, images.short.json; you will need to create your own extra.json later
-var mUrl = images.json;
+var mUrl = "images.json";
 
 
 //You can optionally use the following function as your event callback for loading the source of Images from your json data (for HTMLImageObject).
@@ -91,21 +87,22 @@ $(document).ready( function() {
 	
 	// This initially hides the photos' metadata information
 	//$('.details').eq(0).hide();
-	
+	fetchJSON();
 });
 
 window.addEventListener('load', function() {
 	
 	console.log('window loaded');
 
+
 }, false);
 
-function GalleryImage(location, description, date, img) {
+function GalleryImage() {
 	//implement me as an object to hold the following data about an image:
-	//let location = ""
-	//let description =""
-	//let date =""
-	//let img =""
+	let location = ""
+	let description =""
+	let date =""
+	let img =""
 	//4. either a String (src URL) or an an HTMLImageObject (bitmap of the photo. https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement)
 }
 
@@ -114,11 +111,26 @@ function fetchJSON() {
 	mRequest.onreadystatechange = function () {
 		if (mRequest.readyState == 4 && mRequest.status == 200) {
 			let mJson = JSON.parse(mRequest.responseText);
+			console.log("WORKING")
+			console.log(mJson.images[3].imgPath)
+			iterateJSON(mJson)
+			
 		}
 		else {
 			console.log("We connected to the server, but it returned an error")
 		}
 	}
-	mRequest.open("GET", mURL, true)
+	mRequest.open("GET", mUrl, true)
 	mRequest.send()
+}
+
+
+function iterateJSON(mJson){
+	for(let x = 0; x < mJson.images.length; x++){
+		mImages[x] = new GalleryImage()
+		mImages[x].location = mJson.images[x].imgLocation
+		mImages[x].description = mJson.images[x].description
+		mImages[x].date = mJson.images[x].date
+		mImages[x].img = mJson.images[x].imgPath
+	}
 }
