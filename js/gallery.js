@@ -49,9 +49,9 @@ function swapPhoto() {
 	let description = document.getElementsByClassName("description")[0]
 	let location = document.getElementsByClassName("location")[0]
 	let date = document.getElementsByClassName("date")[0]
-	description.innerHTML = "description: " + mImages[mCurrentIndex].description
-	location.innerHTML = "location: " + mImages[mCurrentIndex].location
-	date.innerHTML = "date: " + mImages[mCurrentIndex].date
+	description.innerHTML = "Description: " + mImages[mCurrentIndex].description
+	location.innerHTML = "Location: " + mImages[mCurrentIndex].location
+	date.innerHTML = "Date: " + mImages[mCurrentIndex].date
 	let mLastFrameTime = 0;
 	mCurrentIndex += 1
 }
@@ -134,3 +134,13 @@ function iterateJSON(mJson){
 		mImages[x].img = mJson.images[x].imgPath
 	}
 }
+
+$("#nextPhoto").click(function() {
+	mCurrentIndex++;
+	swapPhoto();
+});
+
+$("#prevPhoto").click(function() {
+	mCurrentIndex--;
+	swapPhoto();
+});
