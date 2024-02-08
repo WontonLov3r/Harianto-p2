@@ -1,15 +1,15 @@
 // requestAnim shim layer by Paul Irish
-    window.requestAnimFrame = (function(){
-      return  window.requestAnimationFrame       || 
-              window.webkitRequestAnimationFrame || 
-              window.mozRequestAnimationFrame    || 
-              window.oRequestAnimationFrame      || 
-              window.msRequestAnimationFrame     || 
-              function(/* function */ callback, /* DOMElement */ element){
-                window.setTimeout(callback, 1000 / 60);
-              };
-    })();
-  
+window.requestAnimFrame = (function () {
+	return window.requestAnimationFrame ||
+		window.webkitRequestAnimationFrame ||
+		window.mozRequestAnimationFrame ||
+		window.oRequestAnimationFrame ||
+		window.msRequestAnimationFrame ||
+		function (/* function */ callback, /* DOMElement */ element) {
+			window.setTimeout(callback, 1000 / 60);
+		};
+})();
+
 
 // example code from mr doob : http://mrdoob.com/lab/javascript/requestanimationframe/
 
@@ -18,7 +18,7 @@ animate();
 var mLastFrameTime = 0;
 var mWaitTime = 5000; //time in ms
 function animate() {
-    requestAnimFrame( animate );
+	requestAnimFrame(animate);
 	var currentTime = new Date().getTime();
 	if (mLastFrameTime === 0) {
 		mLastFrameTime = currentTime;
@@ -33,13 +33,13 @@ function animate() {
 /************* DO NOT TOUCH CODE ABOVE THIS LINE ***************/
 
 function swapPhoto() {
-	
-		if (mCurrentIndex >= mImages.length) {
-			let mCurrentIndex = 0;
-		} else {
-			let mCurrentIndex = mImages.length -1;
-		  }
-	
+
+	if (mCurrentIndex >= mImages.length) {
+		let mCurrentIndex = 0;
+	} else {
+		let mCurrentIndex = mImages.length - 1;
+	}
+
 	//Add code here to access the #slideShow element.
 	//Access the img element and replace its source
 	//with a new image from your images array which is loaded 
@@ -77,21 +77,54 @@ var mUrl = "images.json";
 //You can optionally use the following function as your event callback for loading the source of Images from your json data (for HTMLImageObject).
 //@param A GalleryImage object. Use this method for an event handler for loading a gallery Image object (optional).
 function makeGalleryImageOnloadCallback(galleryImage) {
-	return function(e) {
+	return function (e) {
 		galleryImage.img = e.target;
 		mImages.push(galleryImage);
 	}
 }
 
-$(document).ready( function() {
-	
+$(document).ready(function () {
+
 	// This initially hides the photos' metadata information
 	//$('.details').eq(0).hide();
 	fetchJSON();
+	$('img.moreIndicator').click(function () {
+		if ($(this).hasClass('rot90')) {
+			$(this).removeClass('rot90').addClass('rot270');
+		} else {
+			$(this).removeClass('rot270').addClass('rot90');
+		}
+		$('div.details').slideToggle('slow', animate());
+
+	});
+
+	$("#nextPhoto").on("click", function () {
+		mCurrentIndex++;
+		if (mCurrentIndex >= mImages.length) {
+			mCurrentIndex = 0; // Loop back to the first photo
+		}
+		swapPhoto();
+	});
+	$('#nextPhoto').position({
+		my:'right',
+		at: 'right',
+		of: '#nav'
+	})
+
+	$("#prevPhoto").on("click", function () {
+		mCurrentIndex = mCurrentIndex - 2;
+		if (mCurrentIndex < 0) {
+			mCurrentIndex = mImages.length - 1; // Loop back to the last photo
+		}
+		swapPhoto();
+		console.log(mCurrentIndex);
+
+	});
+
 });
 
-window.addEventListener('load', function() {
-	
+window.addEventListener('load', function () {
+
 	console.log('window loaded');
 
 
@@ -100,9 +133,9 @@ window.addEventListener('load', function() {
 function GalleryImage() {
 	//implement me as an object to hold the following data about an image:
 	let location = ""
-	let description =""
-	let date =""
-	let img =""
+	let description = ""
+	let date = ""
+	let img = ""
 	//4. either a String (src URL) or an an HTMLImageObject (bitmap of the photo. https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement)
 }
 
@@ -114,7 +147,7 @@ function fetchJSON() {
 			console.log("WORKING")
 			console.log(mJson.images[3].imgPath)
 			iterateJSON(mJson)
-			
+
 		}
 		else {
 			console.log("We connected to the server, but it returned an error")
@@ -125,8 +158,8 @@ function fetchJSON() {
 }
 
 
-function iterateJSON(mJson){
-	for(let x = 0; x < mJson.images.length; x++){
+function iterateJSON(mJson) {
+	for (let x = 0; x < mJson.images.length; x++) {
 		mImages[x] = new GalleryImage()
 		mImages[x].location = mJson.images[x].imgLocation
 		mImages[x].description = mJson.images[x].description
@@ -135,12 +168,4 @@ function iterateJSON(mJson){
 	}
 }
 
-$("#nextPhoto").click(function() {
-	mCurrentIndex++;
-	swapPhoto();
-});
 
-$("#prevPhoto").click(function() {
-	mCurrentIndex--;
-	swapPhoto();
-});
