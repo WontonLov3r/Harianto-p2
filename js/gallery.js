@@ -88,7 +88,7 @@ $(document).ready(function () {
 	// This initially hides the photos' metadata information
 	//$('.details').eq(0).hide();
 	fetchJSON();
-	$('img.moreIndicator').click(function () {
+	$('img.moreIndicator').on("click", function () {
 		if ($(this).hasClass('rot90')) {
 			$(this).removeClass('rot90').addClass('rot270');
 		} else {

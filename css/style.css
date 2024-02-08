@@ -99,5 +99,6 @@ Make it animate nicely. You'll need CSS3 for this*/
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	overflow: hidden; /* Ensure photos fit entirely within the container */
+	overflow: hidden; 
+	
   }
