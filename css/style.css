@@ -38,6 +38,7 @@ body {
 .thumbnail {
 	position: relative;
 	box-shadow: 1px 3px 20px 0px;
+	width:105%;
 }
 
 
@@ -99,6 +100,5 @@ Make it animate nicely. You'll need CSS3 for this*/
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	overflow: hidden; 
-	
+
   }
