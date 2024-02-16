@@ -1,43 +1,43 @@
 {
     "images": [
       {
-        "imgPath": "img/places/borobudurtemple.jpg",
+        "imgPath": "img/borobudurtemple.jpg",
         "imgLocation": "Borobudur Temple",
         "description": "Borobudur Temple during sunrise",
         "date": "01/01/2016"
       },
       {
-        "imgPath": "img/places/mountbromo.jpg",
+        "imgPath": "img/mountbromo.jpg",
         "imgLocation": "Mount Bromo",
         "description": "Mount Bromo volcano at dawn",
         "date": "01/02/2016"
       },
       {
-        "imgPath": "img/places/ubudmonkeyforest.jpg",
+        "imgPath": "img/ubudmonkeyforest.jpg",
         "imgLocation": "Ubud Monkey Forest",
         "description": "Ubud Monkey Forest canopy walk",
         "date": "01/03/2016"
       },
       {
-        "imgPath": "img/places/rajaampatislands.jpg",
+        "imgPath": "img/rajaampatislands.jpg",
         "imgLocation": "Raja Ampat Islands",
         "description": "Raja Ampat Islands from above",
         "date": "01/04/2016"
       },
       {
-        "imgPath": "img/places/prambanantemple.jpg",
+        "imgPath": "img/prambanantemple.jpg",
         "imgLocation": "Prambanan Temple",
         "description": "Prambanan Temple illuminated at night",
         "date": "01/05/2016"
       },
       {
-        "imgPath": "img/places/tanatoraja.jpg",
+        "imgPath": "img/tanatoraja.jpg",
         "imgLocation": "Tana Toraja",
         "description": "Traditional Torajan houses in Tana Toraja",
         "date": "01/06/2016"
       },
       {
-        "imgPath": "img/places/laketoba.jpg",
+        "imgPath": "img/laketoba.jpg",
         "imgLocation": "Lake Toba",
         "description": "Lake Toba under the blue sky",
         "date": "01/07/2016"
