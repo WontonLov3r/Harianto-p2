@@ -33,7 +33,7 @@ function animate() {
 /************* DO NOT TOUCH CODE ABOVE THIS LINE ***************/
 
 function swapPhoto() {
-
+	//Code makes it so that the index starts at 0 for the images and then loops back if the index is at its maximum
 	if (mCurrentIndex >= mImages.length) {
 		let mCurrentIndex = 0;
 	} else {
@@ -83,6 +83,7 @@ function makeGalleryImageOnloadCallback(galleryImage) {
 	}
 }
 
+//Goes through the mUrl variable and checks if it is defined, if not, it makes the variable my own file
 $(document).ready(function () {
 	if (mUrl == null){
 		mUrl = 'extra.json';
@@ -105,6 +106,7 @@ $(document).ready(function () {
 
 	});
 
+	//This next photo function adds 1 to the counter of the mCUrrentIndex to change to the next image on the list
 	$("#nextPhoto").on("click", function () {
 		mCurrentIndex++;
 		if (mCurrentIndex >= mImages.length) {
@@ -112,12 +114,14 @@ $(document).ready(function () {
 		}
 		swapPhoto();
 	});
+	//This fixes the positioning on the image element centering the whole thing
 	$('#nextPhoto').position({
 		my:'right',
 		at: 'right',
 		of: '#nav'
 	})
 
+	//Does the reverse of the next photo function and subtracts one from the mCurrentIndex to bring back the previous image on the list
 	$("#prevPhoto").on("click", function () {
 		mCurrentIndex = mCurrentIndex - 2;
 		if (mCurrentIndex < 0) {
@@ -164,7 +168,7 @@ function fetchJSON() {
 	mRequest.send()
 }
 
-
+//Goes through the whole mJson list and changes each property as the counter increases
 function iterateJSON(mJson) {
 	for (let x = 0; x < mJson.images.length; x++) {
 		mImages[x] = new GalleryImage()
